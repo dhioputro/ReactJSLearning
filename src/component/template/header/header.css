@@ -1,0 +1,16 @@
+.header {
+    background-color:#fddb3a;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header p {
+    color: white;
+    font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-size: 25px;
+    margin-left: 10px;
+}

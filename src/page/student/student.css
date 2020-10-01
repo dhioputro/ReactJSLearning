@@ -1,0 +1,15 @@
+.student {
+    display: flex;
+    flex-direction: row;
+    /* margin: 100px; */
+}
+
+.studentContent { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;  
+    width: 75%;
+    margin: 100px;
+    /* border: 2px solid red; */
+    /* padding: 0 0 10px 0; */
+}

@@ -1,0 +1,15 @@
+.home {
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+}
+
+.homeContent {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;     */
+    width: 75%;
+    margin: 10px 0 50px 0;
+    /* border: 2px solid red;
+    padding: 0 0 10px 0; */
+}

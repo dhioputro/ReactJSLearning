@@ -1,0 +1,31 @@
+.createUser {
+    display: flex;
+    flex-direction: row;
+    /* margin: 100px; */
+}
+
+.createUserContent {
+    display: flex;
+    justify-content: center;    
+    width: 75%;
+    margin: 100px;
+    /* border: 2px solid red; */
+    /* padding: 0 0 10px 0; */
+}
+
+.createUserForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid green; */
+    background-color: #fff!important;
+    padding: 10px;
+    border-radius: 10px;
+    width: 250px;
+    /* box-shadow: 5px 5px 20px grey; */
+}
+
+.createUserForm button {
+    margin: 20px 0 20px 0;
+}
