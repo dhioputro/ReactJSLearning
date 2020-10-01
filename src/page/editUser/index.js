@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import { RowInput } from '../../component'
-// import { connect } from "react-redux"
-// import FirebaseContext from '../../config/firebase/firebaseContext';
-// import { auth } from 'firebase';
+
 
 class EditUser extends Component {
     constructor(props){
         super(props)
         this.state = {
-            // email: "",
             name: "",
             role: "",
             picture: "",
@@ -26,9 +23,9 @@ class EditUser extends Component {
     onClickHandler = () => {
         const { usersDb } = this.props.firebase
         const { user } = this.props
-        let { /*email, */name, role, picture , quotes, github } = this.state
+        let { name, role, picture , quotes, github } = this.state
 
-        // get default value
+        // default value
         if (name === "") {name = user.name}
         if (role === "") {role = user.role}
         if (picture === "") {picture = user.picture}
@@ -50,18 +47,10 @@ class EditUser extends Component {
         return(
             <div className="createUser">
                 <div>
-                    <h3>Edit User</h3>
+                    <h3>Edit Student</h3>
                 </div>
                 <div className="createUserContent">
                     <div className="createUserForm">
-                        {/* <div>
-                            <RowInput
-                                type="email"
-                                name="email"
-                                label="Email"
-                                fnSetValue={this.setValue}
-                            />
-                        </div> */}
                         <div>
                             <RowInput
                                 type="text"

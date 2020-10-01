@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import { RowInput } from '../../component'
-import Navbar from "../../component/template/navbar"
-import "./create.css"
-// import { connect } from "react-redux"
-import FirebaseContext from '../../config/firebase/firebaseContext';
-// import { auth } from 'firebase';
+import "./regis.css"
 
-// import homeLogo from "../../asset/logo/home.png"
+import FirebaseContext from '../../config/firebase/firebaseContext';
+
 
 // Child class
-class CreateUserForm extends Component {
+class RegistrationForm extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -52,8 +49,7 @@ class CreateUserForm extends Component {
                 }).then(() => {
                     alert("Creating user is success")
                 }).catch(err => {
-                    // Handle error here
-                    // Rollback for createFirebaseUser error
+                   alert(err)
                 })
 
             }).catch(err => {
@@ -65,18 +61,9 @@ class CreateUserForm extends Component {
     render(){
         return(
             <div className="createUser">
-                <div className="navbar">
-                    <div className="navbarContent">                          
-                        <Navbar
-                        label="Home"
-                        linkTo="/"
-                        logo="home"/>
-                    </div>  
-                </div>
-
                 <div className="createUserContent">
                     <div className="createUserForm">
-                        <h3>Create User</h3>
+                        <h3>User Registration</h3>
                         <div>
                             <RowInput
                                 type="email"
@@ -122,7 +109,7 @@ class CreateUserForm extends Component {
                             />
                         </div>
                         <div>
-                            <button onClick={this.onClickHandler}>Create User</button>
+                            <button onClick={this.onClickHandler}>Register</button>
                         </div>
                     </div>
                 </div>
@@ -132,7 +119,7 @@ class CreateUserForm extends Component {
 }
 
 // Parent class
-class CreateUser extends Component {
+class Registration extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -140,10 +127,10 @@ class CreateUser extends Component {
     render() {
         return (
             <FirebaseContext.Consumer>
-                {firebase => <CreateUserForm {...this.props} firebase={firebase} />}
+                {firebase => <RegistrationForm {...this.props} firebase={firebase} />}
             </FirebaseContext.Consumer>
         )
     }
 }
 
-export default CreateUser
+export default Registration

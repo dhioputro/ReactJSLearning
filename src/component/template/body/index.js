@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route, Redirect } from "react-router-dom"
-import { Admin, Home, Login, Student, CreateUser } from "../../../page"
+import { Admin, Home, Login, Student, Registration } from "../../../page"
 import { connect } from "react-redux"
 import { FirebaseContext } from '../../../config/firebase'
 import { setLogin, setLogout } from "../../../store/action/authAction"
@@ -9,84 +9,52 @@ import { setLogin, setLogout } from "../../../store/action/authAction"
 class Body extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            // userOnLoginRole: ""
-        }
+        this.state = {}
     }
 
-    // componentDidMount() {
-    //     const { isLogin, userOnLogin, doLogin } = this.props
-    //     const { usersDb } = this.props.firebase
-    //     if (isLogin) {
-    //         usersDb().doc(userOnLogin.uid).get()
-    //             .then( user => {
-    //                 // console.log(user.data())
-    //                 alert("berhasil login")
-    //                 doLogin({...user.data(), uid: userOnLogin.uid})
-    //                 this.setState({
-    //                     userOnLogin.role : user.data().role
-    //                 })
-    //             })
-    //     }
-    // }
-
     render() {
-
         const { isLogin, userOnLogin } = this.props
-        // const { userOnLogin.role } = this.state
-
+        const admin = "k1619L9U1Zbargza9YYCo5Q2NiH3"
+        const student = "fwMImRMpuzcMsfONM5Nm7J1JrKG3"
+        // console.log("login apa ngga? " +isLogin);
         return(
             <Switch>
                 <Route exact path="/">
                     {
-                        (isLogin && userOnLogin.role === "admin") ? (
+                        (isLogin && userOnLogin === admin) ? (
                             <Redirect to="/admin"/>
-                        ) : (isLogin && userOnLogin.role === "student") ? (
+                        ) : (isLogin && userOnLogin === student) ? (
                             <Redirect to="/student"/>
                         ) : 
-                            <Home
-                                // users={this.state.users}
-                            /> 
+                            <Home /> 
                     }
                 </Route>
                 <Route path="/login">
                     {
-                        (isLogin && userOnLogin.role === "admin") ? (
+                        (isLogin === true && userOnLogin.uid === admin) ? (
                             <Redirect to="/admin"/>
-                        ) : (isLogin && userOnLogin.role === "student") ? (
+                        ) : (isLogin && userOnLogin.uid === student) ? (
                             <Redirect to="/student"/>
                         ) : 
-                            <Login
-                                // users = {this.state.users}
-                                // isLogin = {this.state.isLogin}
-                                // fnChangeLoginStatus = {this.changeLoginStatus}
-                            /> 
+                            <Login /> 
                     }
                 </Route>
-                <Route path="/create-user">
+                <Route path="/registration">
                     {
-                        (isLogin && userOnLogin.role === "admin") ? (
+                        (isLogin && userOnLogin.uid === admin) ? (
                             <Redirect to="/admin"/>
-                        ) : (isLogin && userOnLogin.role === "student") ? (
+                        ) : (isLogin && userOnLogin.uid === student) ? (
                             <Redirect to="/student"/>
                         ) : 
-                            <CreateUser
-                                // users = {this.state.users}
-                                // isLogin = {this.state.isLogin}
-                                // fnChangeLoginStatus = {this.changeLoginStatus}
-                            /> 
+                            <Registration /> 
                     }
                 </Route>
                 <Route path="/admin">
                     {
-                        // (true) ? (
-                        (isLogin && userOnLogin.role === "admin") ? (
-                            <Admin
-                                // users = {this.state.users}
-                                // userOnLogin = {this.state.userOnLogin}
-                                // isLogin = {this.state.isLogin}
-                                // fnChangeLogoutStatus = {this.changeLogoutStatus}
-                            />
+                        (isLogin && userOnLogin.uid === admin) ? (
+                            <FirebaseContext.Consumer>
+                                {firebase => <Admin {...this.props} firebase={firebase}/>}  
+                            </FirebaseContext.Consumer>
                         ) : (
                             <Redirect to="/login"/>
                         )
@@ -94,15 +62,10 @@ class Body extends Component {
                 </Route>
                 <Route path="/student">
                     {
-                        (isLogin && userOnLogin.role === "student")? (
+                        (isLogin && userOnLogin.uid === student)? (
                             <FirebaseContext.Consumer>
                                 {firebase => <Student {...this.props} firebase={firebase} />}
                             </FirebaseContext.Consumer>
-                            // <Student
-                            //     userOnLogin = {this.state.userOnLogin}
-                            //     isLogin = {this.state.isLogin}
-                            //     fnChangeLogoutStatus = {this.changeLogoutStatus}
-                            // />
                         ) : (
                             <Redirect to="/login"/>
                         )
@@ -114,7 +77,6 @@ class Body extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    // users: state.usersReducer.users,
     userOnLogin : state.authReducer.userOnLogin,
     isLogin : state.authReducer.isLogin
 })

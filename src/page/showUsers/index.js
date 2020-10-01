@@ -13,19 +13,19 @@ class ShowUsers extends Component {
         let users = []
 
         this.props.firebase.usersDb().get()
-            .then(snapshot => {
-                snapshot.forEach((doc) => {
+            .then(data => {
+                data.forEach((doc) => {
                     const tempUser = {
                         id: doc.id,
                         ...doc.data()
                     }
                     users.push(tempUser)
-                    // console.log(doc.id, '=>', doc.data())
+
                 })
                 this.setState({
                     users
                 })
-                // console.log(users)
+
             })
             .catch((err) => {
                 console.log("error :" + err)

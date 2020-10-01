@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import Navbar from "../../component/template/navbar"
 import { Card } from "../../component"
 import "./student.css"
-import logoutLogo from "../../asset/logo/logout.png"
+
 import { connect } from "react-redux"
 import { setLogout } from '../../store/action/authAction'
 import { Switch, Route } from 'react-router-dom'
 import EditUser from '../editUser'
+
 import FirebaseContext from "../../config/firebase/firebaseContext"
 
 class Student extends Component {
-    //buat fitur logout
 
     logoutHandler = () => {
         const { logoutFirebaseUser } = this.props.firebase
@@ -33,15 +33,15 @@ class Student extends Component {
             <>
                 <div className="student">
                     <div className="navbar">
-                        {/* home */}
+    
                         <div className="navbarContent">
-                            <img className="navbarLogo" src={logoutLogo} alt="logo"/>
+                    
                             <Navbar
                                 label="Home"
                                 linkTo="/student"
                             />
                         </div>
-                        {/* edit */}
+            
                         <div className="navbarContent">
                             
                             <Navbar
@@ -58,10 +58,6 @@ class Student extends Component {
                         </div>                        
                     </div>
                     <div className="studentContent">
-                        {/* <div>
-                            Helo {user.name}
-                        </div> */}
-
                         <Switch>
                             <Route exact path="/student">
                             <div className="card">
@@ -79,7 +75,6 @@ class Student extends Component {
                                 <FirebaseContext.Consumer>
                                     {firebase => <EditUser {...this.props} firebase={firebase} user={user}/>}
                                 </FirebaseContext.Consumer>                                
-                                {/* <EditUser user={user}/> */}
                             </Route>
                         </Switch>                   
                     </div>            
@@ -99,4 +94,3 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Student)
 
-// export default Student

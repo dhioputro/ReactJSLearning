@@ -27,18 +27,16 @@ class LoginForm extends Component {
         const { email, password } = this.state
         const { doLogin } = this.props
         const { loginFirebaseUser, usersDb } = this.props.firebase
-
+        
         if (email === "") {return alert("Email must not be empty!")}
         else if (password === "") {return alert("Password must not be empty!")}
 
-        loginFirebaseUser({email, password}) // sign in with authentication
+        loginFirebaseUser({email, password}) 
             .then( res => {
                 if (res.user) {
-
+                    // console.log(res.user.uid);
                     usersDb().doc(res.user.uid).get()
                         .then( userOnLogin => {
-                            // console.log(userOnLogin.data())
-                            // alert("berhasil login")
                             doLogin({...userOnLogin.data(), uid: res.user.uid})
                         })
                         .then(() => {
@@ -109,10 +107,6 @@ class Login extends Component {
         )
     }
 }
-
-// const mapStateToProps = (state) => ({
-//     users: state.usersReducer.users
-// })
 
 const mapDispatchToProps = (dispatch) => ({
     doLogin: (user) => dispatch(setLogin(user))

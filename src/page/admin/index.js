@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
 import Navbar from "../../component/template/navbar"
-import CreateUser from "../createUser"
+import Registration from "../registration"
 import ShowUsers from "../showUsers"
+import "./admin.css"
+
 import { setLogout } from "../../store/action/authAction"
 import { connect } from "react-redux"
-// import Home from "../home"
-// import { Card } from "../../component"
-import "./admin.css"
 import { Switch, Route } from 'react-router-dom'
-import FirebaseContext from '../../config/firebase/firebaseContext';
 
-import homeLogo from "../../asset/logo/home.png"
-import logoutLogo from "../../asset/logo/logout.png"
-import studentsLogo from "../../asset/logo/student.png"
+import FirebaseContext from '../../config/firebase/firebaseContext';
 
 class Admin extends Component {
 
@@ -32,36 +28,27 @@ class Admin extends Component {
             })
     }
 
-    render(){
-        // const user = this.props.userOnLogin
-        
+    render(){        
         return (
             <>
                 <div className="admin">
                     <div className="navbar">
                         <div className="navbarContent">
-                            <img className="navbarLogo" src={homeLogo} alt="logo"/>
+                            
                             <Navbar
                                 label="Home"
                                 linkTo="/admin"
                             />
                         </div>
-                        {/* <div className="navbarContent">
-                            <img className="navbarLogo" src={studentsLogo} alt="logo"/>
-                            <Navbar
-                                label="Students"
-                                linkTo="/admin/students"
-                            />
-                        </div> */}
                         <div className="navbarContent">
-                            <img className="navbarLogo" src={studentsLogo} alt="logo"/>
+                            
                             <Navbar
                                 label="Create User"
                                 linkTo="/admin/create-user"
                             />
                         </div>
-                        <div className="navbarContent" onClick={() => this.logoutHandler}>
-                            <img className="navbarLogo" src={logoutLogo} alt="logo"/>
+                        <div className="navbarContent" onClick={this.logoutHandler}>
+                            
                             <Navbar
                                 label="Logout"
                                 linkTo="/login"
@@ -79,7 +66,7 @@ class Admin extends Component {
                             </Route> 
                             <Route path="/admin/create-user">
                                 <div>
-                                    <CreateUser />
+                                    <Registration />
                                 </div>
                             </Route>
                         </Switch>
@@ -92,7 +79,7 @@ class Admin extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    userOnLogin: state.authReducer.userOnLogin
+    userOnLogin: state.authReducer.userOnLogin,
 })
 
 const mapDispatchToProps = (dispatch) => ({
