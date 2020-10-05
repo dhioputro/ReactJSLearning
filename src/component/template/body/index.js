@@ -14,16 +14,16 @@ class Body extends Component {
 
     render() {
         const { isLogin, userOnLogin } = this.props
-        const admin = "k1619L9U1Zbargza9YYCo5Q2NiH3"
-        const student = "fwMImRMpuzcMsfONM5Nm7J1JrKG3"
+        const admin = "admin"
+        const student = "student"
         // console.log("login apa ngga? " +isLogin);
         return(
             <Switch>
                 <Route exact path="/">
                     {
-                        (isLogin && userOnLogin === admin) ? (
+                        (isLogin && userOnLogin.role === admin) ? (
                             <Redirect to="/admin"/>
-                        ) : (isLogin && userOnLogin === student) ? (
+                        ) : (isLogin && userOnLogin.role === student) ? (
                             <Redirect to="/student"/>
                         ) : 
                             <Home /> 
@@ -31,9 +31,9 @@ class Body extends Component {
                 </Route>
                 <Route path="/login">
                     {
-                        (isLogin === true && userOnLogin.uid === admin) ? (
+                        (isLogin === true && userOnLogin.role === admin) ? (
                             <Redirect to="/admin"/>
-                        ) : (isLogin && userOnLogin.uid === student) ? (
+                        ) : (isLogin && userOnLogin.role === student) ? (
                             <Redirect to="/student"/>
                         ) : 
                             <Login /> 
@@ -41,17 +41,17 @@ class Body extends Component {
                 </Route>
                 <Route path="/registration">
                     {
-                        (isLogin && userOnLogin.uid === admin) ? (
+                        (isLogin && userOnLogin.role === admin) ? (
                             <Redirect to="/admin"/>
-                        ) : (isLogin && userOnLogin.uid === student) ? (
+                        ) : (isLogin && userOnLogin.role === student) ? (
                             <Redirect to="/student"/>
                         ) : 
-                            <Registration /> 
+                            <Registration  /> 
                     }
                 </Route>
                 <Route path="/admin">
                     {
-                        (isLogin && userOnLogin.uid === admin) ? (
+                        (isLogin && userOnLogin.role === admin) ? (
                             <FirebaseContext.Consumer>
                                 {firebase => <Admin {...this.props} firebase={firebase}/>}  
                             </FirebaseContext.Consumer>
@@ -62,7 +62,7 @@ class Body extends Component {
                 </Route>
                 <Route path="/student">
                     {
-                        (isLogin && userOnLogin.uid === student)? (
+                        (isLogin && userOnLogin.role === student)? (
                             <FirebaseContext.Consumer>
                                 {firebase => <Student {...this.props} firebase={firebase} />}
                             </FirebaseContext.Consumer>

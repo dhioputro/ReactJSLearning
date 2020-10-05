@@ -6,7 +6,6 @@ import { setLogin } from "../../store/action/authAction"
 import { connect } from "react-redux"
 import FirebaseContext from "../../config/firebase/firebaseContext"
 
-// import homeLogo from "../../asset/logo/home.png"
 
 class LoginForm extends Component {
     constructor(props){
@@ -28,8 +27,8 @@ class LoginForm extends Component {
         const { doLogin } = this.props
         const { loginFirebaseUser, usersDb } = this.props.firebase
         
-        if (email === "") {return alert("Email must not be empty!")}
-        else if (password === "") {return alert("Password must not be empty!")}
+        if (email === "") {return alert("Email Harus diisi!")}
+        else if (password === "") {return alert("Password Harus diisi!")}
 
         loginFirebaseUser({email, password}) 
             .then( res => {

@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
 import { RowInput } from '../../component'
-import Navbar from "../../component/template/navbar"
-import "./regis.css"
+import "./createuser.css"
 
 import FirebaseContext from '../../config/firebase/firebaseContext';
 
 
 // Child class
-class RegistrationForm extends Component {
+class CreateUserForm extends Component {
     constructor(props){
         super(props)
         this.state = {
             email: "",
             name: "",
-            role: "student",
+            role: "",
             picture: "",
             quotes:"",
             github: ""
@@ -26,12 +25,18 @@ class RegistrationForm extends Component {
         })
     }
 
+    optionHandler = (el) => {
+        this.setState({
+            role: el.target.value
+        })
+    }
+
     onClickHandler = () => {
         const { email, name, role, picture , quotes, github } = this.state
         const password = name.toLowerCase() +"123"
         
         this.props.firebase
-            .createFirebaseUser({email, password}) // authentication
+            .createFirebaseUser({email, password}) // ke authentication
             .then(authUser => {
                 return this.props.firebase.usersDb().doc(authUser.user.uid).set({ // firestore
                     name,
@@ -56,23 +61,14 @@ class RegistrationForm extends Component {
     render(){
         return(
             <div className="createUser">
-                <div className="navbar">
-                    <div className="navbarContent">                           
-                        <Navbar
-                        label="Home"
-                        linkTo="/"
-                        logo="home"/>
-                    </div>                        
-                </div>
                 <div className="createUserContent">
                     <div className="createUserForm">
-                        <h3>Student Registration</h3>
+                        <h3>User Registration</h3>
                         <div>
                             <RowInput
                                 type="email"
                                 name="email"
                                 label="Email"
-                                placeholder="Email"
                                 fnSetValue={this.setValue}
                             />
                         </div>
@@ -81,16 +77,18 @@ class RegistrationForm extends Component {
                                 type="text"
                                 name="name"
                                 label="Name"
-                                placeholder="Your Full Name"
                                 fnSetValue={this.setValue}
                             />
-                        </div>                  
+                        </div>
+                        <div>
+                            <input type="radio" name={this.state.role} value="admin" onChange={this.optionHandler} />Admin 
+                            <input type="radio" name={this.state.role} value="student" onChange={this.optionHandler} />Student   
+                        </div>                    
                         <div>
                             <RowInput
                                 type="text"
                                 name="picture"
                                 label="Profile Picture"
-                                placeholder="URL"
                                 fnSetValue={this.setValue}
                             />
                         </div>
@@ -99,7 +97,6 @@ class RegistrationForm extends Component {
                                 type="text"
                                 name="quotes"
                                 label="Quotes"
-                                placeholder=" Your Quotes"
                                 fnSetValue={this.setValue}
                             />
                         </div>
@@ -108,12 +105,11 @@ class RegistrationForm extends Component {
                                 type="text"
                                 name="github"
                                 label="Github"
-                                placeholder="Github URL"
                                 fnSetValue={this.setValue}
                             />
                         </div>
                         <div>
-                            <button onClick={this.onClickHandler}>Register</button>
+                            <button onClick={this.onClickHandler}>Create</button>
                         </div>
                     </div>
                 </div>
@@ -123,7 +119,7 @@ class RegistrationForm extends Component {
 }
 
 // Parent class
-class Registration extends Component {
+class CreateUser extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -131,10 +127,10 @@ class Registration extends Component {
     render() {
         return (
             <FirebaseContext.Consumer>
-                {firebase => <RegistrationForm {...this.props} firebase={firebase} />}
+                {firebase => <CreateUserForm {...this.props} firebase={firebase} />}
             </FirebaseContext.Consumer>
         )
     }
 }
 
-export default Registration
+export default CreateUser

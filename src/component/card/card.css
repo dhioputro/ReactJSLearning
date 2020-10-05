@@ -7,7 +7,7 @@
 .cardItem {
     display: flex;
     flex-direction: column;
-    /* border: 2px solid brown; */
+    border: 2px solid yellow;
     box-shadow: 5px 5px 10px grey;
     border-radius: 10px;
     height: 300px;
@@ -16,11 +16,13 @@
 }
 
 .cardProfilePicture {
-    height: 300px;
+    height: auto;
     width: 250px;
-    text-align: center;
+    border: 2px solid grey;
+    justify-self: center;
     border-radius: 10px;
-    background-color: grey;
+    background-color: whitesmoke;
+    justify-items: center;
     overflow: hidden;
 }
 

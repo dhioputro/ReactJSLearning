@@ -12,7 +12,7 @@ class Card extends Component {
                 <div className="cardDetail">
                     <h4>{name}</h4>
                     <p>"{quotes}"</p>
-                    <a href={github} target="blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="avatar"></img></a>
+                    <a href={github} target="blank" >{github}</a>
                 </div>
             </div>
         )

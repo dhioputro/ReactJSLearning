@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Navbar from "../../component/template/navbar"
-import Registration from "../registration"
+import CreateUser from "../createuser"
 import ShowUsers from "../showUsers"
 import "./admin.css"
 
@@ -66,7 +66,7 @@ class Admin extends Component {
                             </Route> 
                             <Route path="/admin/create-user">
                                 <div>
-                                    <Registration />
+                                    <CreateUser />
                                 </div>
                             </Route>
                         </Switch>
