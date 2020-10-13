@@ -1,7 +1,7 @@
 # ReactJSLearning
 
 react-js-7 <br />
-- Task 7 <br />
+-Task 7 <br />
 <br />
 react-js-8 <br />
 - Task 8 <br />
